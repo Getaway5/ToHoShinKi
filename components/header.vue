@@ -15,29 +15,52 @@
         <nuxt-link to="/air">国内机票</nuxt-link>
       </el-row>
       <div>
+
+        <!-- <el-dropdown>
+          <span class="el-dropdown-link">
+            <i class="el-icon-chat-dot-round"></i>
+            消息
+            <i class="el-icon-caret-bottom el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>消息</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown> -->
+       
         <!-- 注册登录 -->
-        <div class="denglu" v-if="false">
+        <div class="denglu" v-if="!$store.state.user.userInfo.token">
           <nuxt-link to="/user/login">登录 / 注册</nuxt-link>
         </div>
         <!-- 用户 -->
-        <el-dropdown>
+       <div v-else>
+          <el-dropdown>
           <span class="el-dropdown-link">
-            <img src="http://157.122.54.189:9095/assets/images/avatar.jpg" alt="">
-            略略略
-            <i class="el-icon-arrow-down el-icon--right"></i>
+            <img :src="$axios.defaults.baseURL+$store.state.user.userInfo.user.defaultAvatar" alt="">
+           {{$store.state.user.userInfo.user.nickname}}
+            <i class="el-icon-arrow-down  el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click.native="handleLoginOut">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <div></div>
+       </div>
       </div>
     </el-row>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    handleLoginOut(){
+      this.$store.commit('user/clearUserInfo')
+       this.$message({
+                message: "退出成功",
+                type: "success"
+            })
+    }
+  }
+};
 </script>
 <style scoped lang="less" >
 .container {
@@ -93,10 +116,15 @@ export default {};
 }
 
 .el-dropdown-link{
+  margin-left: 10px;
     img{
     width: 32px;
     height: 32px;
     vertical-align: middle;
   }
+}
+
+.el-icon-chat-dot-round{
+  font-size: 18px;
 }
 </style>
