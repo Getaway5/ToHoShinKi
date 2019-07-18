@@ -44,7 +44,8 @@
                         <el-col :span="3" class="choose-button">
                             <el-button 
                             type="warning" 
-                            size="mini">
+                            size="mini"
+                            @click="handleChoose(data.id,item.seat_xid)">
                             选定
                             </el-button>
                             <p>剩余：{{item.discount}}</p>
@@ -94,6 +95,17 @@ export default {
             return `${ Math.floor(dis / 60)}时${dis % 60}分`
         }
     },
+    methods: {
+        handleChoose(id,seatXid){
+            this.$router.push({
+                path:'/air/order',
+                query:{
+                    id,
+                    seatXid
+                }
+            })
+        }
+    }
 }
 </script>
 
