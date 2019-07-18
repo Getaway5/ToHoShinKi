@@ -24,13 +24,7 @@
       </ul>
     </div>
 
-    <div v-if="current===2">
-      <ul>
-        <li>3333333</li>
-        <li>3333333</li>
-        <li>3333333</li>
-      </ul>
-    </div>
+   
   </div>
 </template>
 
