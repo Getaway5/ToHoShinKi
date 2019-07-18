@@ -15,6 +15,13 @@
         <li>1111111</li>
       </ul>
     </div>
+    <div v-if="current===0">
+      <ul>
+        <li>1111111</li>
+        <li>1111111</li>
+        <li>1111111</li>
+      </ul>
+    </div>
 
     <div v-if="current===1">
       <ul>
